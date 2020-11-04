@@ -131,9 +131,10 @@ body {
   margin-top: 5px;
   border: solid 1px #000;
 }
-.main__button--container button:focus{
+
+/* .main__button--container button:focus{
   background-color:yellow;
-}
+} */
 
 .main__data--container{
   margin-top: 30px;

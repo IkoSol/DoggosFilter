@@ -29,6 +29,11 @@ var dogs = [
   }
 ];
 
+var doggosFilterByButton = ''
+var newDoggosArray = []
+var header = document.getElementById("myDIV");
+var btns = header.getElementsByClassName("btn");
+
 function displayDoggos() {
   var result = '';
 	dogs.forEach(function(dog) {
@@ -36,7 +41,7 @@ function displayDoggos() {
   });
   document.getElementById('dogs').innerHTML = result;
 }
-              
+
 displayDoggos();
 
 function doggosTypeFilter() {
@@ -50,16 +55,50 @@ function doggosTypeFilter() {
     document.getElementById('dogs').innerHTML = result;
   })
 }
- 
-function doggosSizeFilter(size){
-  var btnPressed=false, smallBtn, mediumBtn, largeBtn, result = '';
-  smallBtn = document.getElementById('Chico');
-  mediumBtn = document.getElementById('Mediano');
-  largeBtn = document.getElementById('Grande');
+
+function addElementsForBtnFilter(size){
   dogs.map(dog =>{
     if (dog.size == size) {
-      result += `<p> ${dog.name} (${dog.size})</p>`
+      newDoggosArray = [...newDoggosArray, dog]
     }
-    document.getElementById('dogs').innerHTML = result;
   })
+  doggosFilterByButton = ''
+  newDoggosArray.map(newDog =>{
+    doggosFilterByButton += `<p> ${newDog.name} (${newDog.size})</p>`
+  })
+  document.getElementById('dogs').innerHTML = doggosFilterByButton;
+}
+
+function removeElementsForBtnFilter(size){
+  dogs.map(dog =>{
+    if (dog.size == size) {
+      newDoggosArray = newDoggosArray.filter(function (d) {
+        return d.size != size
+      })
+    }
+  })
+  if (!newDoggosArray.length){
+    displayDoggos()
+  } else {
+    doggosFilterByButton = ''
+    newDoggosArray.map(newDog =>{
+      doggosFilterByButton += `<p> ${newDog.name} (${newDog.size})</p>`
+    })
+    document.getElementById('dogs').innerHTML = doggosFilterByButton;
+  }
+}
+
+/* This is for setting active buttons*/
+for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener("click", function() {
+    if (this.classList.contains("active")) {
+      removeElementsForBtnFilter(this.id);
+      this.style.backgroundColor = "#EFEFEF";
+      this.classList.remove("active");
+    } else {
+      addElementsForBtnFilter(this.id);
+      this.style.backgroundColor = "yellow";
+      this.classList.add("active")
+    };
+  });
 }
