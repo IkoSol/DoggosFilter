@@ -31,6 +31,7 @@ var dogs = [
 
 var doggosFilterByButton = ''
 var newDoggosArray = []
+var sizesArray = []
 var header = document.getElementById("myDIV");
 var btns = header.getElementsByClassName("btn");
 
@@ -44,16 +45,27 @@ function displayDoggos() {
 
 displayDoggos();
 
-function doggosTypeFilter() {
+function filterByType() {
   var input, filter, result = '';
   input = document.getElementById("razaFilter");
   filter = input.value.toLowerCase();
-  dogs.map(dog =>{
-    if (dog.name.toLowerCase().indexOf(filter) > -1) {
-      result += `<p> ${dog.name} (${dog.size})</p>`
-    }
-    document.getElementById('dogs').innerHTML = result;
-  })
+  if(!sizesArray.length){
+    dogs.map(dog => {
+      if (dog.name.toLowerCase().indexOf(filter) > -1) {
+        result += `<p> ${dog.name} (${dog.size})</p>`
+      } 
+      document.getElementById('dogs').innerHTML = result;
+    })
+  } else {
+    sizesArray.map(size => {
+      dogs.map(dog => {
+        if (dog.name.toLowerCase().indexOf(filter) > -1 && dog.size==size) {
+          result += `<p> ${dog.name} (${dog.size})</p>`
+        } 
+        document.getElementById('dogs').innerHTML = result;
+      })
+    })
+  }
 }
 
 function addElementsForBtnFilter(size){
@@ -92,10 +104,12 @@ function removeElementsForBtnFilter(size){
 for (var i = 0; i < btns.length; i++) {
   btns[i].addEventListener("click", function() {
     if (this.classList.contains("active")) {
+      sizesArray = sizesArray.filter(e => e !== this.id)
       removeElementsForBtnFilter(this.id);
       this.style.backgroundColor = "#EFEFEF";
       this.classList.remove("active");
     } else {
+      sizesArray = [...sizesArray, this.id]
       addElementsForBtnFilter(this.id);
       this.style.backgroundColor = "yellow";
       this.classList.add("active")
