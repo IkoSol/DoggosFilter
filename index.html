@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mascotas</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="header">
+    <div class="header__container">
+      <span class="header__title">mascotas</span>
+      <div class="header__menu">
+        <div class="header__menu--profile">
+            <span>Menu</button>
+        </div>
+        <ul>
+            <li><a>Cuenta</a></li>
+            <li><a>Cerrar sesión</a></li>
+        </ul>
+    </div>
+    </div>
+  </header>
+  <section class="main">
+    <div class="main__container">
+      <div class="main__title">
+        <span>Perros</span>
+      </div>
+      <p class="main__description">Los perros son el mejor amigo del hombre. Existen varias razas en el mundo.</p>
+      <p class="main__description2">Con estos botones puedes filtrarlos de acuerdo a su tamaño:</p>
+
+      <div class="main__button--container">
+        <button id="Chico" onClick="doggosSizeFilter('Chico')">Chicos</button>
+        <button id="Mediano" onClick="doggosSizeFilter('Mediano')">Medianos</button>
+        <button id="Grande" onClick="doggosSizeFilter('Grande')">Grandes</button>
+      </div>
+
+      <p class="main__description2">Filtrar por nombre de raza</p>
+      <input type="text" id="razaFilter" onkeyup="doggosTypeFilter()" placeholder="Escribe una raza..." title="Filtrar por nombre de raza">
+
+      <div class="main__data--container">
+        <p id="dogs" class="main__data"></p>
+      </div>
+     
+    </div>
+  </section>
+  <script src="js/script.js"></script>
+</body>
+</html>
