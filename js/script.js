@@ -54,8 +54,11 @@ function filterByType() {
       if (dog.name.toLowerCase().indexOf(filter) > -1) {
         result += `<p> ${dog.name} (${dog.size})</p>`
       } 
-      document.getElementById('dogs').innerHTML = result;
     })
+    if (result == ""){
+      result = '<p> No se encontraron resultados.</p>'
+    }
+    document.getElementById('dogs').innerHTML = result;
   } else {
     sizesArray.map(size => {
       dogs.map(dog => {
@@ -64,6 +67,10 @@ function filterByType() {
         } 
         document.getElementById('dogs').innerHTML = result;
       })
+      if (result == ""){
+        result = '<p> No se encontraron resultados.</p>'
+      }
+      document.getElementById('dogs').innerHTML = result;
     })
   }
 }
